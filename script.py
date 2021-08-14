@@ -40,8 +40,10 @@ for n in count(start_block):
 
     if n % 100 == 0 and n < web3.eth.block_number:
         print(style(f'{web3.eth.block_number - n:,d} blocks remaining', dim=True))
-    block = web3.eth.get_block(n, True)
-    
+    try:
+        block = web3.eth.get_block(n, True)
+    except Exception:
+        pass
     # print(block)
     
     for tx in block.transactions:
